@@ -63,19 +63,19 @@ class MServer:
             meta={"version": "1.0", "author": "Brij Joe"}
         )
         def web_search(query: str):
-            logger.info(f"Searching web for query: {query}")
+            print(f">>>>>>>>>> Searching web for query: {query}")
             results = self.tavily_client.search(query, topic="general", max_results=3)
-            logger.info(f"Web Search Found {len(results)} results.")
+            print(f">>>>>>>>>> Web Search Found {len(results)} results.")
             return str(results)
 
         @self.mcp.tool(
-            name="top10_news_website",
+            name="top_3_news_website",
             title="Top 10 News Websites",
             description="Get top 3 list of popular news websites.",
             meta={"version": "1.0", "author": "Brij Joe"}
         )
         def random_news_website( k: int = 3):
-            logger.info(f"Getting top 3 Indian news websites")
+            print(f">>>>>>>> Getting top 3 Indian news websites")
             indian_news_websites = [
                 "https://timesofindia.indiatimes.com",
                 "https://www.ndtv.com",
@@ -89,7 +89,7 @@ class MServer:
                 "https://economictimes.indiatimes.com"
             ]
             selected_sites = random.sample(indian_news_websites, 3)
-            logger.info(f"Found random 3 websites: {selected_sites}")
+            print(f">>>>>>> Found random 3 websites: {selected_sites}")
             return selected_sites
 
         @self.mcp.prompt(

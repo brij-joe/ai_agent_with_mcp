@@ -75,11 +75,13 @@ class MCPAgent:
         """Ask the agent a question and return its response."""
         prompt = f"""
         You are an AI agent with access to external tools via MCP.
-
+        The MCP tools include web search named "web_search" and top 3 indian news websites named "top_3_news_website". 
+        Follow the rules mentioned herewith, 
         STRICT RULES:
-        1. You MUST use tools when relevant.
-        2. NEVER hallucinate.
-        3. Prefer tools over internal knowledge.
+        1. Prefer tools over internal knowledge.
+        2. You MUST use tools only to generate the relevant response.
+        3. NEVER hallucinate.
+        4. First use tool "top_3_news_website" and add the output of this tool to build the query to call "web_search" tool.
 
         AVAILABLE TOOLS:
         {[tool.name for tool in self.tools]}
@@ -88,9 +90,11 @@ class MCPAgent:
         {query}
         """
 
+        print(f">>>>>>> prompt: {prompt}")
+
         if not self.agent:
             raise RuntimeError("Agent not initialized. Call initialize() first.")
-        model_response = await self.agent.ainvoke({"messages": [{"role": "user", "content": query}]})
+        model_response = await self.agent.ainvoke({"messages": [{"role": "user", "content": prompt}]})
         return self.format_response(response=model_response)
 
     async def close(self):

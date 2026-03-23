@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 async def interactive_loop() -> None:
     """Run an interactive loop to continuously accept user input."""
     agent = MCPAgent()
-    await agent._init_mcp_client()
+    await agent.init_mcp_client()
     await agent.init_agent()
 
     print("\n\nAI Agent is ready. Type 'exit' to quit.")
@@ -42,7 +42,7 @@ async def main() -> None:
     agent = MCPAgent()
     await agent.init_mcp_client()
     await agent.init_agent()
-    response = await agent.ask("What are some news headlines today in India?")
+    response = await agent.ask("What are top news headlines today in India and around the world?")
     print(f"Received response: \n\n{response}")
     await  agent.close()
 
