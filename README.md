@@ -73,7 +73,7 @@ External Tools (e.g., Web Search)
 ### 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/brij-joe/ai_agent_with_mcp.git
 cd ai_agent_with_mcp
 ```
 
